@@ -1,103 +1,401 @@
-import Image from "next/image";
+interface Basic {
+  id: number;
+  img_url: string;
+  title: string;
+  desc: string;
+  normal_price: number;
+  saled_price: number;
+  link_url: string;
+}
+
+interface Tag {
+  type: "배송" | "적립";
+  cont: string;
+}
+
+interface Shared extends Basic {
+  total_cnt: number;
+  cur_cnt: number;
+}
+
+interface Fruits extends Basic {
+  tags: Tag[];
+}
+
+interface Gifts extends Basic {
+  cont: string[];
+  days: string[];
+}
+
+const dummy_shared: Shared[] = [
+  {
+    id: 0,
+    img_url: "Text",
+    title: "과일01",
+    desc: "과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST",
+    normal_price: 13000,
+    saled_price: 10000,
+    total_cnt: 100,
+    cur_cnt: 83,
+    link_url: "/",
+  },
+  {
+    id: 1,
+    img_url: "Text",
+    title: "과일02",
+    desc: "과일02 상세정보",
+    normal_price: 15000,
+    saled_price: 12000,
+    total_cnt: 100,
+    cur_cnt: 14,
+    link_url: "/",
+  },
+  {
+    id: 2,
+    img_url: "Text",
+    title: "과일03",
+    desc: "과일03 상세정보",
+    normal_price: 13000,
+    saled_price: 9000,
+    total_cnt: 100,
+    cur_cnt: 58,
+    link_url: "/",
+  },
+];
+
+const dummy_fruits: Fruits[] = [
+  {
+    id: 0,
+    img_url: "Text",
+    title: "과일01",
+    desc: "과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST",
+    normal_price: 13000,
+    saled_price: 10000,
+    tags: [
+      {
+        type: "배송",
+        cont: "무료배송",
+      },
+      {
+        type: "적립",
+        cont: "적립 2560p",
+      },
+    ],
+    link_url: "/",
+  },
+  {
+    id: 1,
+    img_url: "Text",
+    title: "과일02",
+    desc: "과일02 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    tags: [
+      {
+        type: "적립",
+        cont: "적립 1060p",
+      },
+    ],
+    link_url: "/",
+  },
+  {
+    id: 2,
+    img_url: "Text",
+    title: "과일03",
+    desc: "과일03 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    tags: [
+      {
+        type: "적립",
+        cont: "적립 3060p",
+      },
+    ],
+    link_url: "/",
+  },
+  {
+    id: 3,
+    img_url: "Text",
+    title: "과일04",
+    desc: "과일04 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    tags: [
+      {
+        type: "적립",
+        cont: "적립 160p",
+      },
+    ],
+    link_url: "/",
+  },
+  {
+    id: 4,
+    img_url: "Text",
+    title: "과일05",
+    desc: "과일05 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    tags: [
+      {
+        type: "적립",
+        cont: "적립 2060p",
+      },
+    ],
+    link_url: "/",
+  },
+  {
+    id: 5,
+    img_url: "Text",
+    title: "과일06",
+    desc: "과일06 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    tags: [
+      {
+        type: "적립",
+        cont: "적립 560p",
+      },
+    ],
+    link_url: "/",
+  },
+];
+
+const dummy_gifts: Gifts[] = [
+  {
+    id: 0,
+    img_url: "Text",
+    title: "과일01",
+    desc: "과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST 과일01 상세정보 여러 줄 TEST",
+    normal_price: 13000,
+    saled_price: 10000,
+    cont: ["구성품01", "구성품02", "구성품03", "구성품04"],
+    days: ["기념일01", "기념일02", "기념일03", "기념일04"],
+    link_url: "/",
+  },
+  {
+    id: 1,
+    img_url: "Text",
+    title: "과일02",
+    desc: "과일02 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    cont: ["구성품01", "구성품02", "구성품03", "구성품04"],
+    days: ["기념일01", "기념일02", "기념일03", "기념일04"],
+    link_url: "/",
+  },
+  {
+    id: 2,
+    img_url: "Text",
+    title: "과일03",
+    desc: "과일03 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    cont: ["구성품01", "구성품02", "구성품03", "구성품04"],
+    days: ["기념일01", "기념일02", "기념일03", "기념일04"],
+    link_url: "/",
+  },
+  {
+    id: 3,
+    img_url: "Text",
+    title: "과일04",
+    desc: "과일04 상세정보",
+    normal_price: 13000,
+    saled_price: 10000,
+    cont: ["구성품01", "구성품02", "구성품03", "구성품04"],
+    days: ["기념일01", "기념일02", "기념일03", "기념일04"],
+    link_url: "/",
+  },
+];
+
+import { HeartHandshake } from "lucide-react";
+import { Users } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import CardLayout from "@/components_dev/Card_Layout/CardLayout";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
+import { it } from "node:test";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className={``}>
+      <article>
+        <Carousel className="w-full h-fit">
+          <CarouselContent type="banner" className="w-full h-52 p-4">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <CarouselItem
+                key={index}
+                className="bg-gray-500 w-full rounded-2xl"
+              >
+                <div className="p-1"></div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </article>
+      <main className="pl-4 mb-8">
+        <h2 className="title_txt flex">
+          <div>
+            <HeartHandshake color="#fff" />
+          </div>{" "}
+          <span>공구 온당</span>
+        </h2>
+        <p className="mb-3">함께하면 더 달콤해지는 과일 공구</p>
+        <div className="">
+          <Carousel orientation="horizontal">
+            <CarouselContent className="">
+              {dummy_shared.map((item) => (
+                <div key={item.id}>
+                  <CarouselItem className="w-72 h-full">
+                    <CardLayout
+                      img_url={item.img_url}
+                      title={item.title}
+                      desc={item.desc}
+                      link_url={item.link_url}
+                      cont={
+                        <>
+                          <div>
+                            <s className="text-main-gray-text text-sm">
+                              {item.normal_price}원
+                            </s>
+                            <p className="price_txt">{item.saled_price}원</p>
+                          </div>
+                          <div className="mt-1">
+                            <div className="mb-1.5 flex justify-between text-sm">
+                              <div className="flex">
+                                <Users size={15} color="#ff8802" />
+                                <span className="ml-1">
+                                  {item.cur_cnt}명 참여
+                                </span>
+                              </div>
+                              <span className="text-main-gray-text">
+                                단,{" "}
+                                <span className="text-primary">
+                                  {item.total_cnt - item.cur_cnt}명
+                                </span>{" "}
+                                남음!
+                              </span>
+                            </div>
+                            <Progress
+                              value={(item.cur_cnt / item.total_cnt) * 100}
+                            />
+                          </div>
+                        </>
+                      }
+                      go_btn={
+                        <div className="flex w-full">
+                          <button className="comm_btn second_btn w-full mr-2">
+                            공유하기
+                          </button>
+                          <button className="comm_btn main_btn w-full">
+                            공구참여
+                          </button>
+                        </div>
+                      }
+                    />
+                  </CarouselItem>
+                </div>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <div className="px-4">
+        <section className="mb-8">
+          <h2 className="title_txt flex">
+            <div>
+              <HeartHandshake color="#fff" />
+            </div>{" "}
+            <span>신선한 과일</span>
+          </h2>
+          <p className="mb-3">엄선된 프리미엄 과일을 만나보세요</p>
+          <div className="grid grid-cols-2 gap-4">
+            {dummy_fruits.map((item) => (
+              <div key={item.id}>
+                <CardLayout
+                  link_url={item.link_url}
+                  img_url={item.img_url}
+                  title={item.title}
+                  desc={item.desc}
+                  cont={
+                    <div>
+                      <div className="price_txt mt-2">
+                        <p>{item.saled_price}원</p>
+                      </div>
+                      <div className="flex w-full flex-wrap gap-1">
+                        {(item.tags as Tag[]).map((tag) => (
+                          <div key={item.id + tag.type} className="flex">
+                            <Badge
+                              variant="outline"
+                              className={cn(
+                                tag.type === "배송" &&
+                                  "text-teal-500 border-[1px] border-solid border-teal-500",
+                                tag.type === "적립" &&
+                                  "text-blue-500 border-[1px] border-solid border-blue-500"
+                              )}
+                            >
+                              {tag.cont}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  }
+                  go_btn={
+                    <>
+                      <button className="comm_btn main_btn w-full">
+                        장바구니 담기
+                      </button>
+                    </>
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+      <section className="w-full mb-12 pl-4">
+        <h2 className="title_txt flex">
+          <div>
+            <HeartHandshake color="#fff" />
+          </div>{" "}
+          <span>선물 하기</span>
+        </h2>
+        <p className="mb-3">마음을 전하는 특별한 과일 선물</p>
+        <Carousel orientation="horizontal">
+          <CarouselContent className="">
+            {dummy_gifts.map((item) => (
+              <div key={item.id} className="w-1/2">
+                <CarouselItem className="w-full">
+                  <CardLayout
+                    link_url={item.link_url}
+                    img_url={item.img_url}
+                    title={item.title}
+                    desc={item.desc}
+                    cont={
+                      <>
+                        <div>
+                          <p>{item.saled_price}</p>
+                        </div>
+                      </>
+                    }
+                    go_btn={
+                      <>
+                        <button>선물하기</button>
+                      </>
+                    }
+                  />
+                </CarouselItem>
+              </div>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </section>
     </div>
   );
 }
